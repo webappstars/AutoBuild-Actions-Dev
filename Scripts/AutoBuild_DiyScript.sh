@@ -78,12 +78,6 @@ Firmware_Diy() {
 			AddPackage git lean autocore-modify Hyy2001X master
 			cat ${CustomFiles}/x86_64_Kconfig >> ${WORK}/target/linux/x86/config-5.15
 		;;
-		hiwifi_hc5962)
-			AddPackage git passwall-depends openwrt-passwall xiaorouji packages
-			AddPackage git passwall-luci openwrt-passwall xiaorouji luci
-			rm -rf packages/lean/autocore
-			AddPackage git lean autocore-modify Hyy2001X master
-		;;
 		hiwifi_hc5861)
 			AddPackage git passwall-depends openwrt-passwall xiaorouji packages
 			AddPackage git passwall-luci openwrt-passwall xiaorouji luci
