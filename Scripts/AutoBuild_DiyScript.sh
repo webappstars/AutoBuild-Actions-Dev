@@ -76,7 +76,13 @@ Firmware_Diy() {
 			AddPackage git passwall-luci openwrt-passwall xiaorouji luci
 			rm -rf packages/lean/autocore
 			AddPackage git lean autocore-modify Hyy2001X master
-			cat ${CustomFiles}/x86_64_Kconfig >> ${WORK}/target/linux/x86/config-5.15
+			# cat ${CustomFiles}/${TARGET_PROFILE}_kExtra >> ${WORK}/target/linux/x86/config-5.15
+			sed -i -- 's:/bin/ash:'/bin/bash':g' ${BASE_FILES}/etc/passwd
+			cat ${CustomFiles}/${TARGET_PROFILE}_kExtra >> ${WORK}/target/linux/x86/config-5.18
+			patch < ${CustomFiles}/Patches/upgrade_intel_igpu_drv.patch -p1 -d ${WORK}
+			sed -i 's/1.2021.35/2022.03.02/g' feeds/packages/net/smartdns/Makefile
+                        sed -i 's/f50e4dd0813da9300580f7188e44ed72a27ae79c/1fd18601e7d8ac88e8557682be7de3dc56e69105/g' feeds/packages/net/smartdns/Makefile
+                        sed -i 's/^PKG_MIRROR_HASH/#&/' feeds/packages/net/smartdns/Makefile
 		;;
 		hiwifi_hc5861)
 			AddPackage git passwall-depends openwrt-passwall xiaorouji packages
